@@ -5,9 +5,7 @@ const CityTemp = ({ weather }) => {
       <h3 className="cityName">{weather.name}</h3>
       <div className="temprature">
         {Math.floor(weather.main.temp)}°
-        <span style={{ fontSize: "18px", fontStyle: "italic" }}>
-          {weather.weather[0].description}
-        </span>
+        <span className="CityCondition">{weather.weather[0].description}</span>
         <div className="date">
           {new Date().toLocaleDateString("en-US", {
             weekday: "long",

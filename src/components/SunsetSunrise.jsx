@@ -9,14 +9,16 @@ const SunriseSunset = ({ weather }) => {
       hour12: true,
     });
   };
+  const now = Math.floor(Date.now() / 1000);
+  const isDaytime = now >= sunrise && now < sunset;
 
   return (
     <div className="sun-box">
       <div className="sun-wrapper">
         <div className="sunrise">
-          <div className="sun" />
-          <p>sunrise: {formatTime(sunrise)}</p>
-          <p>sunset: {formatTime(sunset)}</p>
+          {isDaytime && <div className="sun" />}
+          {isDaytime && <p>sunrise: {formatTime(sunrise)}</p>}
+          {isDaytime && <p>sunset: {formatTime(sunset)}</p>}
         </div>
       </div>
     </div>

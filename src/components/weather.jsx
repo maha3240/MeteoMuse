@@ -6,10 +6,7 @@ const Weather = ({ getWeather, city, setCity }) => {
   return (
     <div className="weather-container">
       <h2 style={{ textShadow: "0 4px 10px rgba(249, 245, 245, 0.73)" }}>
-        <DiDigitalOcean
-          style={{ textShadow: "0 4px 10px rgba(7, 7, 7, 0.73)" }}
-          className="icons"
-        />
+        <DiDigitalOcean style={{ fontSize: "3rem", color: "#fcfafa" }} />
         Ⲙ𝔢t𝔢oᗰus𝔢
       </h2>
       <div className="search-bar">
