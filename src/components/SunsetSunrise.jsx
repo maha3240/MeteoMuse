@@ -1,7 +1,10 @@
+import { BsClouds } from "react-icons/bs";
+import { WiRaindrops } from "react-icons/wi";
+import { FaCloud } from "react-icons/fa";
 const SunriseSunset = ({ weather }) => {
   const sunrise = weather?.sys?.sunrise || 1900990; // Default value if sunrise is not available
   const sunset = weather?.sys?.sunset || 1900990; // Default value if sunset is not available
-
+  const condition = weather?.weather?.[0]?.main?.toLowerCase() || "";
   const formatTime = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleTimeString([], {
       hour: "2-digit",
@@ -16,7 +19,30 @@ const SunriseSunset = ({ weather }) => {
     <div className="sun-box">
       <div className="sun-wrapper">
         <div className="sunrise">
-          {isDaytime && <div className="sun" />}
+          {isDaytime ? (
+            <div className="sun-container">
+              <div className="sun" />
+              {condition.includes("clouds") && (
+                <>
+                  <BsClouds className="cloud" style={{ fontSize: "8rem" }} />
+                  <FaCloud className="cloud" />
+                  <FaCloud className="cloud" />
+                  <FaCloud className="cloud" />
+                </>
+              )}
+              {condition.includes("rain") && (
+                <>
+                  <div className="cloud" />
+                  <WiRaindrops className="rain" />
+                  <WiRaindrops className="rain" />
+                  <WiRaindrops className="rain" />
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="moon" />
+          )}
+
           {isDaytime && <p>sunrise: {formatTime(sunrise)}</p>}
           {isDaytime && <p>sunset: {formatTime(sunset)}</p>}
         </div>
