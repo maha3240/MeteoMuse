@@ -1,6 +1,3 @@
-import { BsClouds } from "react-icons/bs";
-import { WiRaindrops } from "react-icons/wi";
-import { FaCloud } from "react-icons/fa";
 const SunriseSunset = ({ weather }) => {
   const sunrise = weather?.sys?.sunrise || 1900990; // Default value if sunrise is not available
   const sunset = weather?.sys?.sunset || 1900990; // Default value if sunset is not available
@@ -23,10 +20,18 @@ const SunriseSunset = ({ weather }) => {
             <div className="sun-container">
               <div className="sun" />
 
-              {condition.includes("clouds") && <></>}
+              {condition.includes("clouds") && (
+                <>
+                  <img
+                    src="../../assets/cloudy1.png"
+                    alt="cloudy"
+                    className="cloudyimg"
+                  />
+                </>
+              )}
               {condition.includes("rain") && (
                 <>
-                  <div className="cloud" />
+                  <img src="../../assets/rain.png" alt="" className="rainimg" />
                 </>
               )}
             </div>
