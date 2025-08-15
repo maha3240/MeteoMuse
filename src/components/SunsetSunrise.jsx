@@ -22,20 +22,11 @@ const SunriseSunset = ({ weather }) => {
           {isDaytime ? (
             <div className="sun-container">
               <div className="sun" />
-              {condition.includes("clouds") && (
-                <>
-                  <BsClouds className="cloud" style={{ fontSize: "8rem" }} />
-                  <FaCloud className="cloud" />
-                  <FaCloud className="cloud" />
-                  <FaCloud className="cloud" />
-                </>
-              )}
+
+              {condition.includes("clouds") && <></>}
               {condition.includes("rain") && (
                 <>
                   <div className="cloud" />
-                  <WiRaindrops className="rain" />
-                  <WiRaindrops className="rain" />
-                  <WiRaindrops className="rain" />
                 </>
               )}
             </div>
