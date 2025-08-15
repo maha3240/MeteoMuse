@@ -46,14 +46,7 @@ function App() {
               <CityTemp weather={weather} />
               <SunriseSunset weather={weather}></SunriseSunset>
             </div>
-            <div
-              className="inline-wrap2"
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
+            <div className="inline-wrap2">
               <WeatherDiscribtion weather={weather}></WeatherDiscribtion>
               <Forecast city={weather.name}></Forecast>
             </div>
