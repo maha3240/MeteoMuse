@@ -1,8 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherInput from "./weatherInput.jsx";
 import { DiDigitalOcean } from "react-icons/di";
+import { useContext } from "react";
+import { weatherContext } from "../srore/weatherContext.jsx";
 
-const Weather = ({ getWeather, city, setCity }) => {
+const Weather = () => {
+  const { getWeather, city } = useContext(weatherContext);
   return (
     <div className="weather-container">
       <h2
@@ -15,8 +18,8 @@ const Weather = ({ getWeather, city, setCity }) => {
         Ⲙ𝔢t𝔢oᗰus𝔢
       </h2>
       <div className="search-bar">
-        <WeatherInput setCity={setCity} city={city} />
-        <button className="btn-getweather" onClick={getWeather}>
+        <WeatherInput />
+        <button className="btn-getweather" onClick={() => getWeather(city)}>
           Get Weather
         </button>
       </div>

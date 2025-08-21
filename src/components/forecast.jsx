@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { weatherContext } from "../srore/weatherContext.jsx";
 
-const Forecast = ({ city }) => {
+const Forecast = () => {
   const [forecast, setForecast] = useState([]);
   const apiKey = import.meta.env.VITE_WEATHERAPI_API_KEY;
+  const { weather } = useContext(weatherContext);
+  const city = weather?.name || "";
 
   useEffect(() => {
     if (!city) return;

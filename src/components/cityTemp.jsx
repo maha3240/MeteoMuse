@@ -1,4 +1,9 @@
-const CityTemp = ({ weather }) => {
+import { useContext } from "react";
+import { weatherContext } from "../srore/weatherContext.jsx";
+
+const CityTemp = () => {
+  const { weather } = useContext(weatherContext);
+
   if (!weather) return null;
   return (
     <div className="city-temp">

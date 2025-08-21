@@ -1,16 +1,9 @@
-const SunriseSunset = ({ weather }) => {
-  const sunrise = weather?.sys?.sunrise || 1900990; // Default value if sunrise is not available
-  const sunset = weather?.sys?.sunset || 1900990; // Default value if sunset is not available
-  const condition = weather?.weather?.[0]?.main?.toLowerCase() || "";
-  const formatTime = (timestamp) => {
-    return new Date(timestamp * 1000).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
-  const now = Math.floor(Date.now() / 1000);
-  const isDaytime = now >= sunrise && now < sunset;
+import { useContext } from "react";
+import { weatherContext } from "../srore/weatherContext.jsx";
+
+const SunriseSunset = () => {
+  const { isDaytime, condition, formatTime, sunrise, sunset } =
+    useContext(weatherContext);
 
   return (
     <div className="sun-box">

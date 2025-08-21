@@ -4,8 +4,11 @@ import { MdAir } from "react-icons/md";
 import { FaTemperatureLow } from "react-icons/fa";
 import { WiBarometer } from "react-icons/wi";
 import { MdOutlineVisibility } from "react-icons/md";
+import { useContext } from "react";
+import { weatherContext } from "../srore/weatherContext.jsx";
 
-const WeatherDiscribtion = ({ weather }) => {
+const WeatherDiscribtion = () => {
+  const { weather } = useContext(weatherContext);
   if (!weather) return null;
 
   return (
