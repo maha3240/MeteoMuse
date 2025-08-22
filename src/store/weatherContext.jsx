@@ -10,15 +10,18 @@ const weatherContext = createContext({
   getWeather: () => {},
   formatTime: () => {},
   isDaytime: false,
+  isNighttime: false,
   condition: "",
   sunrise: 1900990, // Default value if sunrise is not available
   sunset: 1900990, // Default value if sunset is not available
 });
 
 const WeatherProvider = ({ children }) => {
-  const [city, setCity] = useState();
-  const [weather, setWeather] = useState();
-  const [error, setError] = useState();
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
+  const [error, setError] = useState("");
+  const [isDaytime, setIsDaytime] = useState(false);
+  const [isNighttime, setIsNighttime] = useState(false);
   const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
   const getWeather = (cityName) => {
@@ -32,11 +35,20 @@ const WeatherProvider = ({ children }) => {
         if (data.cod === 200) {
           setWeather(data);
           setError("");
+          const sunrise = data.sys.sunrise;
+          const sunset = data.sys.sunset;
+          const now = Math.floor(Date.now() / 1000);
+          const daytime = now >= sunrise && now < sunset;
+          setIsDaytime(daytime);
+          setIsNighttime(!daytime);
         } else {
           setWeather(null);
           setError("City not found...");
+          setIsDaytime(false);
+          setIsNighttime(false);
         }
       });
+    setCity("");
   };
   const sunrise = weather?.sys?.sunrise;
   const sunset = weather?.sys?.sunset;
@@ -48,8 +60,6 @@ const WeatherProvider = ({ children }) => {
       hour12: true,
     });
   };
-  const now = Math.floor(Date.now() / 1000);
-  const isDaytime = now >= sunrise && now < sunset;
 
   return (
     <weatherContext.Provider
@@ -63,6 +73,7 @@ const WeatherProvider = ({ children }) => {
         getWeather,
         formatTime,
         isDaytime,
+        isNighttime,
         condition,
         sunrise,
         sunset,

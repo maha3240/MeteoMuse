@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { weatherContext } from "../srore/weatherContext.jsx";
+import { weatherContext } from "../store/weatherContext.jsx";
 
 const Forecast = () => {
   const [forecast, setForecast] = useState([]);
   const apiKey = import.meta.env.VITE_WEATHERAPI_API_KEY;
-  const { weather } = useContext(weatherContext);
+  const { weather, isDaytime } = useContext(weatherContext);
   const city = weather?.name || "";
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const Forecast = () => {
       .then((data) => {
         if (data.forecast && data.forecast.forecastday) {
           setForecast(data.forecast.forecastday);
-          console.log(data.forecast.forecastday);
         } else {
           setForecast([]);
         }
@@ -26,7 +25,7 @@ const Forecast = () => {
   if (!city || forecast.length === 0) return null;
 
   return (
-    <div className="forecast">
+    <div className={isDaytime ? "forecast" : "forecast-night"}>
       <div className="forecast-items">
         {forecast.map((day, index) => (
           <div key={index} className="forecast-item">

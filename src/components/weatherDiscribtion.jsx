@@ -5,14 +5,20 @@ import { FaTemperatureLow } from "react-icons/fa";
 import { WiBarometer } from "react-icons/wi";
 import { MdOutlineVisibility } from "react-icons/md";
 import { useContext } from "react";
-import { weatherContext } from "../srore/weatherContext.jsx";
+import { weatherContext } from "../store/weatherContext.jsx";
 
 const WeatherDiscribtion = () => {
-  const { weather } = useContext(weatherContext);
+  const { weather, isDaytime } = useContext(weatherContext);
   if (!weather) return null;
 
   return (
-    <div className="grid text-center weather-discribtion">
+    <div
+      className={
+        isDaytime
+          ? "grid text-center weather-discribtion"
+          : "grid text-center weather-discribtion-night"
+      }
+    >
       <div className="g-col-6 g-col-md-4 discribtionitems">
         <FaTemperatureLow className="icons" />
         <span>Feels like:</span> {Math.floor(weather.main.feels_like)}° C

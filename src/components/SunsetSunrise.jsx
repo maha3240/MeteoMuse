@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { weatherContext } from "../srore/weatherContext.jsx";
+import { weatherContext } from "../store/weatherContext.jsx";
 
 const SunriseSunset = () => {
   const { isDaytime, condition, formatTime, sunrise, sunset } =
@@ -12,11 +12,10 @@ const SunriseSunset = () => {
           {isDaytime ? (
             <div className="sun-container">
               <div className="sun" />
-
               {condition.includes("clouds") && (
                 <>
                   <img
-                    src="../../assets/cloudy1.png"
+                    src="../../assets/cloudysun.png"
                     alt="cloudy"
                     className="cloudyimg"
                   />
@@ -27,12 +26,45 @@ const SunriseSunset = () => {
                   <img src="../../assets/rain.png" alt="" className="rainimg" />
                 </>
               )}
+              {!condition.includes("clouds") && !condition.includes("rain") && (
+                <img src="../../assets/sun2.png" alt="sun" className="sunimg" />
+              )}
             </div>
           ) : (
-            <div className="moon" />
+            <div className="moon">
+              {condition.includes("clouds") && (
+                <>
+                  <img
+                    src="../../assets/cloudynight.png"
+                    alt="cloudy"
+                    className="cloudyimg"
+                  />
+                </>
+              )}
+              {condition.includes("rain") && (
+                <>
+                  <img
+                    src="../../assets/rainnight.png"
+                    alt=""
+                    className="rainimg"
+                  />
+                </>
+              )}
+              {!condition.includes("clouds") && !condition.includes("rain") && (
+                <img
+                  src="../../assets/moon.png"
+                  alt="moon"
+                  className="moonimg"
+                />
+              )}
+            </div>
           )}
 
-          {isDaytime && <p>sunrise: {formatTime(sunrise)}</p>}
+          {isDaytime ? (
+            <p>sunrise: {formatTime(sunrise)}</p>
+          ) : (
+            <p>Condition: {condition}</p>
+          )}
           {isDaytime && <p>sunset: {formatTime(sunset)}</p>}
         </div>
       </div>

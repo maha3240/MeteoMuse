@@ -3,20 +3,35 @@ import Weather from "./components/weather.jsx";
 import WeatherDiscribtion from "./components/weatherDiscribtion.jsx";
 import CityTemp from "./components/cityTemp.jsx";
 import SunriseSunset from "./components/SunsetSunrise.jsx";
-//import Forecast from "./components/forecast.jsx";
+import Forecast from "./components/forecast.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-import WeatherProvider from "./srore/weatherContext.jsx";
 import { useContext } from "react";
-import { weatherContext } from "./srore/weatherContext.jsx";
+import { weatherContext } from "./store/weatherContext.jsx";
 
 function App() {
-  const { error, weather } = useContext(weatherContext);
-  console.log(weather);
-
+  const { error, weather, isDaytime, isNighttime } = useContext(weatherContext);
   return (
-    <WeatherProvider>
-      <div className="App">
-        <div className="overlay"></div>
+    <>
+      <div
+        className="App"
+        style={{
+          backgroundImage: isDaytime
+            ? `url("../assets/daybg.jpg")`
+            : isNighttime
+            ? `url("../assets/nightbg.jpg")`
+            : `url("../assets/bg-img.jpg")`,
+        }}
+      >
+        <div
+          className="overlay"
+          style={{
+            backgroundColor: isDaytime
+              ? "rgba(255, 255, 255, 0.3)"
+              : isNighttime
+              ? "rgba(0, 0, 0, 0.5)"
+              : "rgba(42, 41, 41, 0.1)",
+          }}
+        ></div>
         <Weather />
         {error && <p className="Error">{error}</p>}
         {weather && (
@@ -27,12 +42,12 @@ function App() {
             </div>
             <div className="inline-wrap2">
               <WeatherDiscribtion />
-              {/* <Forecast /> */}
+              <Forecast />
             </div>
           </div>
         )}
       </div>
-    </WeatherProvider>
+    </>
   );
 }
 
